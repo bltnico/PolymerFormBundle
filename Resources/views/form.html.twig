@@ -1,0 +1,76 @@
+{# Defaults #}
+{% if not display_submit is defined %} {% set display_submit = false %} {% endif %}
+{% if not ignore_fields is defined %} {% set ignore_fields = [] %} {% endif %}
+
+{# Global #}
+{% set type_in_form = [] %}
+
+{% if not form is defined  %}
+
+    {# Form isn't defined #}
+    {{ render(controller('BltnicoFormPolymerBundle:Exception:formNotExist')) }}
+
+{% endif %}
+
+{% for input in form %}
+
+    {% if input not in ignore_fields %}
+
+        {% set type = input.vars.block_prefixes[1] %}
+        {% set type_in_form = type_in_form|merge(input.vars.block_prefixes) %}
+        
+        {# 
+            Work for input type : 
+                - text
+                - password
+                - search 
+                - email
+                - number
+                - date
+        #}
+        {% if (type == "text") %}
+
+            {% block text_widget %}
+                {% set input_name = input.vars.name %}
+                <sf-polymer-input
+                        name="{{ form.nom.vars.full_name }}"
+                        id="{{ form.nom.vars.id }}"
+                        label="{{ form.nom.vars.name }}"
+                        required="{{ form.nom.vars.required }}">
+                </sf-polymer-input>
+            {% endblock %}
+
+        {% elseif (type == "hidden") %}
+
+
+        {% elseif (type == "checkbox") %}
+
+
+        {% elseif (type == "entity") %}
+
+
+        {# {% else %}
+                
+            Unknown field type
+            {{ render(controller('BltnicoFormPolymerBundle:Exception:unknownFieldType', {'type' : type })) }} #}
+
+        {% endif %}
+
+    {% else %}
+        
+        {# Ignore field doesn't exist #}
+        {{ render(controller('BltnicoFormPolymerBundle:Exception:ignoreFieldNotExist', {'field' : input })) }}
+
+    {% endif %}
+
+{% endfor %}
+
+
+{# Add submit button if not already defined #}
+{% if ("submit" not in type_in_form) and (display_submit) %}
+    {% block submit_widget %}
+        <sf-polymer-input-submit
+            value="Inscription">
+        </sf-polymer-input-submit>
+    {% endblock %}
+{% endif %}	
