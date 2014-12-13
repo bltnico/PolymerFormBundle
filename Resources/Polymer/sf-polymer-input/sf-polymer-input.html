@@ -1,0 +1,34 @@
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-input-decorator/paper-input-decorator.html}">
+
+<polymer-element name="sf-polymer-input" attributes="name id label required">
+
+    <template>
+        <style>
+            paper-input { width: 100%; }
+        </style>
+        <div>
+            <paper-input floatingLabel label="{{ label | lcFirst }}" {{ required }}></paper-input>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            ready: function() {
+                this.paper = this.shadowRoot.querySelector('paper-input');
+                this.input = this.paper.shadowRoot.querySelector('input');
+
+                this.input.setAttribute('name', this.name);
+                this.input.setAttribute('id', this.id);
+
+                console.log(this.required);
+
+                return true;
+            },
+            lcFirst: function(str) {
+                return str.charAt(0).toUpperCase() + str.slice(1);
+            }
+        });
+    </script>
+
+</polymer-element>
