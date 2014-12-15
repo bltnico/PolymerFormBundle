@@ -33,10 +33,10 @@
             {% block text_widget %}
                 {% set input_name = input.vars.name %}
                 <sf-polymer-input
-                        name="{{ form.nom.vars.full_name }}"
-                        id="{{ form.nom.vars.id }}"
-                        label="{{ form.nom.vars.name }}"
-                        required="{{ form.nom.vars.required }}">
+                        name="{{ form[input_name].vars.full_name }}"
+                        id="{{ form[input_name].vars.id }}"
+                        label="{{ form[input_name].vars.name }}"
+                        required="{{ form[input_name].vars.required }}">
                 </sf-polymer-input>
             {% endblock %}
 
