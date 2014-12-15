@@ -1,16 +1,24 @@
 {# Defaults #}
 {% if not display_submit is defined %} {% set display_submit = false %} {% endif %}
 {% if not ignore_fields is defined %} {% set ignore_fields = [] %} {% endif %}
+{% if not token is defined %} {% set token = false %} {% endif %}
+{% if not display_errors is defined %} {% set display_errors = false %} {% endif %}
+
 
 {# Global #}
 {% set type_in_form = [] %}
 
+
 {% if not form is defined  %}
-
     {# Form isn't defined #}
-    {{ render(controller('BltnicoFormPolymerBundle:Exception:formNotExist')) }}
-
+    {{ render(controller('PwndUserBundle:Polymer:formNotExist')) }}
 {% endif %}
+
+
+{% if display_errors %}
+    {{ form_errors(form) }}
+{% endif %}
+
 
 {% for input in form %}
 
@@ -20,24 +28,21 @@
         {% set type_in_form = type_in_form|merge(input.vars.block_prefixes) %}
         
         {# 
-            Work for input type : 
-                - text
-                - password
-                - search 
-                - email
-                - number
-                - date
-        #}
+         #  Work for input type : 
+         #        - text
+         #        - password
+         #        - search 
+         #        - email
+         #        - number
+         #        - date
+         #}
         {% if (type == "text") %}
 
             {% block text_widget %}
                 {% set input_name = input.vars.name %}
-                <sf-polymer-input
-                        name="{{ form[input_name].vars.full_name }}"
-                        id="{{ form[input_name].vars.id }}"
-                        label="{{ form[input_name].vars.name }}"
-                        required="{{ form[input_name].vars.required }}">
+                <sf-polymer-input data-target="" name="{{ form[input_name].vars.full_name }}" id="{{ form[input_name].vars.id }}" label="{{ form[input_name].vars.name }}" required="{{ form[input_name].vars.required }}">
                 </sf-polymer-input>
+                <input type="hidden" name="{{ form[input_name].vars.full_name }}">
             {% endblock %}
 
         {% elseif (type == "hidden") %}
@@ -52,14 +57,14 @@
         {# {% else %}
                 
             Unknown field type
-            {{ render(controller('BltnicoFormPolymerBundle:Exception:unknownFieldType', {'type' : type })) }} #}
+            {{ render(controller('PwndUserBundle:Polymer:unknownFieldType', {'type' : type })) }} #}
 
         {% endif %}
 
     {% else %}
         
         {# Ignore field doesn't exist #}
-        {{ render(controller('BltnicoFormPolymerBundle:Exception:ignoreFieldNotExist', {'field' : input })) }}
+        {{ render(controller('PwndUserBundle:Polymer:ignoreFieldNotExist', {'field' : input })) }}
 
     {% endif %}
 
@@ -73,4 +78,4 @@
             value="Inscription">
         </sf-polymer-input-submit>
     {% endblock %}
-{% endif %}	
+{% endif %} 
