@@ -1,3 +1,5 @@
+<script src=""></script>
+
 {# Defaults #}
 {% if not display_submit is defined %} {% set display_submit = false %} {% endif %}
 {% if not ignore_fields is defined %} {% set ignore_fields = [] %} {% endif %}
@@ -17,6 +19,11 @@
 
 {% if display_errors %}
     {{ form_errors(form) }}
+{% endif %}
+
+
+{% if token %}
+    {{ form_widget(form._token) }}
 {% endif %}
 
 
@@ -40,7 +47,7 @@
 
             {% block text_widget %}
                 {% set input_name = input.vars.name %}
-                <sf-polymer-input data-target="" name="{{ form[input_name].vars.full_name }}" id="{{ form[input_name].vars.id }}" label="{{ form[input_name].vars.name }}" required="{{ form[input_name].vars.required }}">
+                <sf-polymer-input lol="" name="{{ form[input_name].vars.full_name }}" id="{{ form[input_name].vars.id }}" label="{{ form[input_name].vars.name }}" required="{{ form[input_name].vars.required }}">
                 </sf-polymer-input>
                 <input type="hidden" name="{{ form[input_name].vars.full_name }}">
             {% endblock %}
