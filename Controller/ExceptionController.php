@@ -29,7 +29,7 @@ class ExceptionController extends Controller
 	 */
 	public function ignoreFieldNotExistAction($field) 
 	{
-		$err = sprintf("Field %s doesn't exist.", $field);
+		$err = sprintf("Field \"%s\" doesn't exist.", $field);
 
 		throw new \Exception($err);
 	}

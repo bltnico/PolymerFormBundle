@@ -1,5 +1,3 @@
-<script src=""></script>
-
 {# Defaults #}
 {% if not display_submit is defined %} {% set display_submit = false %} {% endif %}
 {% if not ignore_fields is defined %} {% set ignore_fields = [] %} {% endif %}
@@ -28,12 +26,13 @@
 
 
 {% for input in form %}
-
-    {% if input not in ignore_fields %}
-
-        {% set type = input.vars.block_prefixes[1] %}
-        {% set type_in_form = type_in_form|merge(input.vars.block_prefixes) %}
         
+    {% set input_name = input.vars.name %}
+    {% set type = input.vars.block_prefixes[1] %}
+    {% set type_in_form = type_in_form|merge(input.vars.block_prefixes) %}
+
+    {% if input_name not in ignore_fields %}
+
         {# 
          #  Work for input type : 
          #        - text
@@ -46,7 +45,6 @@
         {% if (type == "text") %}
 
             {% block text_widget %}
-                {% set input_name = input.vars.name %}
                 <sf-polymer-input lol="" name="{{ form[input_name].vars.full_name }}" id="{{ form[input_name].vars.id }}" label="{{ form[input_name].vars.name }}" required="{{ form[input_name].vars.required }}">
                 </sf-polymer-input>
                 <input type="hidden" name="{{ form[input_name].vars.full_name }}">
@@ -58,21 +56,23 @@
         {% elseif (type == "checkbox") %}
 
 
+        {% elseif (type == "select") %}
+
+
+        {% elseif (type == "choice") %}
+
+
         {% elseif (type == "entity") %}
 
 
-        {# {% else %}
-                
-            Unknown field type
+        {% else %}
+            {# Unknown field type #}
             {{ render(controller('PwndUserBundle:Polymer:unknownFieldType', {'type' : type })) }} #}
-
         {% endif %}
 
     {% else %}
-        
         {# Ignore field doesn't exist #}
-        {{ render(controller('PwndUserBundle:Polymer:ignoreFieldNotExist', {'field' : input })) }}
-
+        {{ render(controller('PwndUserBundle:Polymer:ignoreFieldNotExist', {'field' : input_name })) }}
     {% endif %}
 
 {% endfor %}
