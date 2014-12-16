@@ -74,11 +74,7 @@
 
     {# Add submit button if not already defined #}
     {% if ("submit" not in type_in_form) and (display_submit) %}
-        {% block submit_widget %}
-            <sf-polymer-input-submit
-                value="Inscription">
-            </sf-polymer-input-submit>
-        {% endblock %}
+        {{ polymer.submit() }}
     {% endif %} 
 
 {% endspaceless %}
