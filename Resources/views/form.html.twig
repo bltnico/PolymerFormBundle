@@ -1,3 +1,6 @@
+{% import 'PwndUserBundle:Form:input.html.twig' as polymer %}
+
+
 {# Defaults #}
 {% if not display_submit is defined %} {% set display_submit = false %} {% endif %}
 {% if not ignore_fields is defined %} {% set ignore_fields = [] %} {% endif %}
@@ -40,28 +43,17 @@
          #        - search 
          #        - email
          #        - number
-         #        - date
          #}
         {% if (type == "text") %}
-
-            {% block text_widget %}
-                <sf-polymer-input lol="" name="{{ form[input_name].vars.full_name }}" id="{{ form[input_name].vars.id }}" label="{{ form[input_name].vars.name }}" required="{{ form[input_name].vars.required }}">
-                </sf-polymer-input>
-                <input type="hidden" name="{{ form[input_name].vars.full_name }}">
-            {% endblock %}
-
+            {{ polymer.text(form, input_name) }}
         {% elseif (type == "hidden") %}
-
-
+            {{ form_row(input) }}
         {% elseif (type == "checkbox") %}
-
-
+            {{ polymer.checkbox() }}
         {% elseif (type == "select") %}
-
-
+            {{ polymer.select() }}
         {% elseif (type == "choice") %}
-
-
+            {{ polymer.choice() }}
         {% elseif (type == "entity") %}
 
 

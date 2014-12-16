@@ -1,0 +1,20 @@
+{% macro text(form, input_name) %}
+	<sf-polymer-input lol="" name="{{ form[input_name].vars.full_name }}" id="{{ form[input_name].vars.id }}" label="{{ form[input_name].vars.name }}" required="{{ form[input_name].vars.required }}">
+    </sf-polymer-input>
+    <input type="hidden" name="{{ form[input_name].vars.full_name }}">
+{% endmacro %}
+
+
+{% macro checkbox() %}
+
+{% endmacro %}
+
+
+{% macro select() %}
+	<sf-polymer-select></sf-polymer-select>
+{% endmacro %}
+
+
+{% macro choice() %}
+	<sf-polymer-select></sf-polymer-select>
+{% endmacro %}
