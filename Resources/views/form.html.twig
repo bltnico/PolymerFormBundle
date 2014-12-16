@@ -1,6 +1,5 @@
 {% import 'PwndUserBundle:Form:input.html.twig' as polymer %}
 
-
 {# Defaults #}
 {% if not display_submit is defined %} {% set display_submit = false %} {% endif %}
 {% if not ignore_fields is defined %} {% set ignore_fields = [] %} {% endif %}
@@ -28,53 +27,58 @@
 {% endif %}
 
 
-{% for input in form %}
-        
-    {% set input_name = input.vars.name %}
-    {% set type = input.vars.block_prefixes[1] %}
-    {% set type_in_form = type_in_form|merge(input.vars.block_prefixes) %}
+{% spaceless %}
 
-    {% if input_name not in ignore_fields %}
+    {% for input in form %}
+            
+        {% set input_name = input.vars.name %}
+        {% set type = input.vars.block_prefixes[1] %}
+        {% set type_in_form = type_in_form|merge(input.vars.block_prefixes) %}
 
-        {# 
-         #  Work for input type : 
-         #        - text
-         #        - password
-         #        - search 
-         #        - email
-         #        - number
-         #}
-        {% if (type == "text") %}
-            {{ polymer.text(form, input_name) }}
-        {% elseif (type == "hidden") %}
-            {{ form_row(input) }}
-        {% elseif (type == "checkbox") %}
-            {{ polymer.checkbox() }}
-        {% elseif (type == "select") %}
-            {{ polymer.select() }}
-        {% elseif (type == "choice") %}
-            {{ polymer.choice() }}
-        {% elseif (type == "entity") %}
+        {% if input_name not in ignore_fields %}
 
+            {# 
+             #  Work for input type : 
+             #        - text
+             #        - password
+             #        - search 
+             #        - email
+             #        - number
+             #        - date
+             #}
+            {% if (type == "text") %}
+                {{ polymer.text(form, input_name) }}
+            {% elseif (type == "hidden") %}
+                {{ form_row(input) }}
+            {% elseif (type == "checkbox") %}
+                {{ polymer.checkbox() }}
+            {% elseif (type == "select") %}
+                {{ polymer.select() }}
+            {% elseif (type == "choice") %}
+                {{ polymer.choice() }}
+            {% elseif (type == "entity") %}
+
+
+            {% else %}
+                {# Unknown field type #}
+                {{ render(controller('PwndUserBundle:Polymer:unknownFieldType', {'type' : type })) }} #}
+            {% endif %}
 
         {% else %}
-            {# Unknown field type #}
-            {{ render(controller('PwndUserBundle:Polymer:unknownFieldType', {'type' : type })) }} #}
+            {# Ignore field doesn't exist #}
+            {{ render(controller('PwndUserBundle:Polymer:ignoreFieldNotExist', {'field' : input_name })) }}
         {% endif %}
 
-    {% else %}
-        {# Ignore field doesn't exist #}
-        {{ render(controller('PwndUserBundle:Polymer:ignoreFieldNotExist', {'field' : input_name })) }}
-    {% endif %}
-
-{% endfor %}
+    {% endfor %}
 
 
-{# Add submit button if not already defined #}
-{% if ("submit" not in type_in_form) and (display_submit) %}
-    {% block submit_widget %}
-        <sf-polymer-input-submit
-            value="Inscription">
-        </sf-polymer-input-submit>
-    {% endblock %}
-{% endif %} 
+    {# Add submit button if not already defined #}
+    {% if ("submit" not in type_in_form) and (display_submit) %}
+        {% block submit_widget %}
+            <sf-polymer-input-submit
+                value="Inscription">
+            </sf-polymer-input-submit>
+        {% endblock %}
+    {% endif %} 
+
+{% endspaceless %}
