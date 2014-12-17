@@ -1,4 +1,4 @@
-{% set path = "Polymer" %}
+{% if not path is defined %}{% set path = "Polymer" %}{% endif %}
 {% set files = ['sf-polymer-input','sf-polymer-submit','sf-polymer-select'] %}
 
 {% for file in files %}
