@@ -1,6 +1,6 @@
 <?php 
 
-namespace Bltnico\Bundle\FormPolymerBundle\Controller;
+namespace Bltnico\Bundle\PolymerFormBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 

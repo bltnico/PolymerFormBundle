@@ -6,10 +6,10 @@
  *
  */
 
-namespace Bltnico\Bundle\FormPolymerBundle;
+namespace Bltnico\Bundle\PolymerFormBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class BltnicoFormPolymerBundle extends Bundle
+class BltnicoPolymerFormBundle extends Bundle
 {
 }

@@ -1,7 +1,7 @@
 {
-    "name": "bltnico/form-polymer",
+    "name": "bltnico/polymer-form",
     "type": "symfony-bundle",
-    "description": "Symfony FormPolymerBundle",
+    "description": "More info on github !",
     "keywords": [],
     "license": "MIT",
     "authors": [
@@ -19,8 +19,8 @@
         "doctrine/doctrine-bundle":       "1.2.*"
     },
     "autoload": {
-        "psr-0": { "Bltnico\\Bundle\\FormPolymerBundle": "" }
+        "psr-0": { "Bltnico\\Bundle\\PolymerFormBundle": "" }
     },
-    "target-dir": "Bltnico/Bundle/FormPolymerBundle",
+    "target-dir": "Bltnico/Bundle/PolymerFormBundle",
     "minimum-stability": "dev"
 }
