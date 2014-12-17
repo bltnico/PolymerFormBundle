@@ -17,15 +17,36 @@
                 width: 100%;
                 padding: 5px 0;
                 font-family: inherit, sans-serif, arial;
+                position: relative;
             }
-            select:active, select:focus { 
+            select:active, 
+            select:focus { 
                 outline: none; 
                 border-width: 2px; 
                 border-color: #673AB7; 
             }
+            div { position: relative; overflow: hidden; }
+            .ripples::before {
+                content: "";
+                position: absolute;
+                z-index: 9999;
+                top: 0; right: 0; bottom: 0; left: 0;
+                margin: auto;
+                width: 0;
+                height: 0;
+                background: rgba(0,0,0,.02);
+            }
+            .ripples:hover::before {
+                content: "";
+                width: 200%;
+                height: 200%;
+                border-radius: 200%;
+                -webkit-transition: all 345ms ease-in-out;
+                transition: all 345ms ease-in-out;
+            }
         </style>
         <div>
-            <div>
+            <div class="ripples">
                 <select name="" id="">
                     <option value="">lol</option>
                     <option value="">lol</option>
@@ -34,6 +55,6 @@
                 </select>
             </div>
         </div>
-    </template>
+        </template>
 
 </polymer-element>

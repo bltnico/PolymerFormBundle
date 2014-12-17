@@ -1,0 +1,6 @@
+{% set path = "Polymer" %}
+{% set file = ['sf-polymer-input','sf-polymer-submit','sf-polymer-select'] %}
+
+{% for f in file %}
+	<link rel="import" href="{{ asset(path ~ '/' ~ f ~ '/' ~ f ~ '.html') }}">
+{% endfor %}
