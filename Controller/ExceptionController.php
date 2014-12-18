@@ -23,9 +23,9 @@ class ExceptionController extends Controller
 	}
 
 	/**
-	 * 
+	 *
 	 * @param (string) $field
-	 * @throw Exception
+	 * @throw \Exception
 	 */
 	public function ignoreFieldNotExistAction($field) 
 	{
@@ -37,7 +37,7 @@ class ExceptionController extends Controller
 	/**
 	 * 
 	 * @param (string) $type
-	 * @throw Exception
+	 * @throw \Exception
 	 */
 	public function unknownFieldTypeAction($type) 
 	{
